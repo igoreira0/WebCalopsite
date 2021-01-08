@@ -3,6 +3,7 @@ package com.calopsite.demo.services;
 import com.calopsite.demo.entities.User;
 import com.calopsite.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
