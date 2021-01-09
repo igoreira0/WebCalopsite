@@ -16,16 +16,16 @@ import java.util.List;
 public class UserResource {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
-        List<User> list = service.findAll();
+        List<User> list = userService.findAll();
         return ResponseEntity.ok().body(list);
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> findByID(@PathVariable Long id){
-        User obj = service.findByID(id);
+        User obj = userService.findByID(id);
         return ResponseEntity.ok().body(obj);
     }
 

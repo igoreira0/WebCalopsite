@@ -13,14 +13,14 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     public List<User> findAll(){
-        return repository.findAll();
+        return userRepository.findAll();
     }
     @GetMapping
     public User findByID(Long id){
-        Optional<User> obj = repository.findById(id);
-        return obj.get();
+        Optional<User> user = userRepository.findById(id);
+        return user.get();
     }
 }
