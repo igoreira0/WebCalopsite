@@ -1,5 +1,6 @@
 package com.calopsite.demo.services;
 import com.calopsite.demo.domain.entities.Bird;
+import com.calopsite.demo.domain.entities.Vivarium;
 import com.calopsite.demo.domain.entities.Mutation;
 import com.calopsite.demo.repositories.BirdRepository;
 import com.calopsite.demo.repositories.MutationRepository;
@@ -17,6 +18,9 @@ public class BirdService {
     @Autowired
     private BirdRepository birdRepository;
 
+
+
+
     @GetMapping
     public List<Bird> findAll(){
         return birdRepository.findAll();
@@ -28,4 +32,8 @@ public class BirdService {
             throw new NotFoundException(HttpStatus.BAD_REQUEST,"A Mutação não existe!");
         return bird.get();
     }
+    public static void newBird(Long id, Mutation mutation, Long fatherId, Long motherId, Vivarium vivarium) {
+        Bird newBird = new Bird(null, mutation, fatherId, motherId, vivarium);
+    }
 }
+
