@@ -1,5 +1,8 @@
 package com.calopsite.demo.domain.entities;
 
+import com.calopsite.demo.domain.enums.Profile;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -12,17 +15,21 @@ public class User implements Serializable {
     private Long id;
     private String name;
     private String email;
+    @JsonIgnore
     private String password;
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy = "user")
     private List<Product> product;
     @OneToMany(mappedBy = "user")
     private List<Vivarium> vivarium;
+    private Profile profile;
 
     public User() {
+        this.profile = Profile.CLIENT;
     }
 
     public User(Long id) {
         this.id = id;
+        this.profile = Profile.CLIENT;
     }
 
     public User(Long id, String name, String email, String password) {
@@ -30,7 +37,15 @@ public class User implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.product = product;
+        this.profile = Profile.CLIENT;
+    }
+
+    public User(Long id, String name, String email, String password, Profile profile) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.profile = profile;
     }
 
     public Long getId() {
@@ -39,6 +54,14 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public String getName() {

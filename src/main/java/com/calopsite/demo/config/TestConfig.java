@@ -1,5 +1,7 @@
 package com.calopsite.demo.config;
 
+
+
 import com.calopsite.demo.domain.entities.*;
 import com.calopsite.demo.domain.enums.Gender;
 import com.calopsite.demo.domain.enums.ProductType;
@@ -8,13 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
+
+
 
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -28,10 +35,12 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User u1 = new User(null, "Maria Brown", "maria@gmail.com", "123456");
-        User u2 = new User(null, "Alex Green", "alex@gmail.com", "123456");
+        User u1 = new User(null, "Maria Brown", "maria@gmail.com", bCryptPasswordEncoder.encode("123456"), com.calopsite.demo.domain.enums.Profile.CLIENT);
+        User u2 = new User(null, "Alex Green", "alex@gmail.com", bCryptPasswordEncoder.encode("123456"), com.calopsite.demo.domain.enums.Profile.CLIENT);
+        User u3 = new User(null, "Igor Ferreira", "igor@gmail.com", bCryptPasswordEncoder.encode("igor123"), com.calopsite.demo.domain.enums.Profile.ADMIN);
         Long idU1 = userRepository.save(u1).getId();
         Long idU2 = userRepository.save(u2).getId();
+        userRepository.save(u3);
 
         Product p1 = new Product(null, "Alpiste", 3F, idU1, ProductType.FOOD);
         Product p2 = new Product(null, "Xarope", 10F, idU1, ProductType.MEDICAMENT);
