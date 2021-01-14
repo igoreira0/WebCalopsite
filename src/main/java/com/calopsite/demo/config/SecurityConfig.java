@@ -2,6 +2,7 @@ package com.calopsite.demo.config;
 
 import com.calopsite.demo.security.JWTAuthenticationFilter;
 import com.calopsite.demo.security.JWTUtil;
+import com.calopsite.demo.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -66,5 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
     }
 }
