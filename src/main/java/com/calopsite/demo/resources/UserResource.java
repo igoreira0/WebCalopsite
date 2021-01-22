@@ -1,6 +1,7 @@
 package com.calopsite.demo.resources;
 
 import com.calopsite.demo.domain.entities.User;
+import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.services.UserService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,10 @@ public class UserResource {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<User> newUser(@RequestParam("name") @NotNull String name,
+    public ResponseEntity<UserDTO> newUser(@RequestParam("name") @NotNull String name,
                         @RequestParam("email") @NotNull String email,
                         @RequestParam("password") @NotNull String password){
-        User u1 = userService.createNewUser(name,email,password);
-        return ResponseEntity.ok().body(u1);
+        return ResponseEntity.ok().body(new UserDTO(userService.createNewUser(name,email,password)));
     }
 
 
