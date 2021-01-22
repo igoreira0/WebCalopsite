@@ -15,7 +15,7 @@ public class Vivarium implements Serializable {
     @JsonProperty("bird_child")
     private Integer birdChild;
     private String description;
-    @OneToMany(mappedBy = "vivarium")
+    @OneToMany(mappedBy = "vivarium", cascade = CascadeType.REMOVE)
     private List<Bird> bird;
     @ManyToOne()
     private User user;
