@@ -18,9 +18,9 @@ public class User implements Serializable {
     private String email;
     @JsonIgnore
     private String password;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Product> product;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Vivarium> vivarium;
     private Profile profile;
 
