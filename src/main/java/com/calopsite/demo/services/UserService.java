@@ -41,9 +41,10 @@ public class UserService {
         return user.get();
     }
 
-    public void createNewUser(String name, String email, String password){
+    public User createNewUser(String name, String email, String password){
         User u1 = new User(null, name, email, bCryptPasswordEncoder.encode(password), com.calopsite.demo.domain.enums.Profile.CLIENT);
         userRepository.save(u1);
+        return u1;
     }
     public void delEmail(Long id){
         userRepository.deleteById(id);

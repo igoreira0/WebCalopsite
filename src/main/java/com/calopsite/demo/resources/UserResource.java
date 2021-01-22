@@ -35,11 +35,12 @@ public class UserResource {
         return ResponseEntity.ok().body("Deleted");
     }
 
-    @PostMapping("/new/{name}/{email}")
-    public void newUser(@PathVariable("name") @NotNull String name,
-                        @PathVariable("email") @NotNull String email,
+    @PostMapping("/new")
+    public ResponseEntity<User> newUser(@RequestParam("name") @NotNull String name,
+                        @RequestParam("email") @NotNull String email,
                         @RequestParam("password") @NotNull String password){
-        userService.createNewUser(name,email,password);
+        User u1 = userService.createNewUser(name,email,password);
+        return ResponseEntity.ok().body(u1);
     }
 
 
