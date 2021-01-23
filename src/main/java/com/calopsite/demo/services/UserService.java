@@ -2,6 +2,7 @@ package com.calopsite.demo.services;
 
 import com.calopsite.demo.domain.entities.User;
 import com.calopsite.demo.domain.enums.Profile;
+import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.repositories.UserRepository;
 import com.calopsite.demo.security.UserSS;
 import com.calopsite.demo.utils.exceptions.AuthorizationException;
@@ -74,7 +75,17 @@ public class UserService {
             return false;
         }
         return true;
+    }
 
+    public UserDTO getLoggedUser(){
+        UserSS userSS = authenticated();
+        if(userSS == null){
+            throw new AuthorizationException(HttpStatus.FORBIDDEN,"Usuário não está logado");
+        }
+        Optional<User> user = userRepository.findById(userSS.getId());
+        if(user.isEmpty())
+            throw new NotFoundException(HttpStatus.BAD_REQUEST,"Usuário não está logado");
+        return new UserDTO(user.get());
     }
 
 

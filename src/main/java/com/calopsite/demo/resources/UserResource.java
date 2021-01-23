@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -43,6 +44,11 @@ public class UserResource {
         return ResponseEntity.ok().body(new UserDTO(userService.createNewUser(name,email,password)));
     }
 
+    @GetMapping(value = "/logged")
+    public ResponseEntity<UserDTO> logged(){
+        UserDTO userDTO = userService.getLoggedUser();
+        return ResponseEntity.ok().body(userDTO);
+    }
 
 
 }
