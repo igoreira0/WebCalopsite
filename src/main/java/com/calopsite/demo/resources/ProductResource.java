@@ -1,6 +1,7 @@
 package com.calopsite.demo.resources;
 
 import com.calopsite.demo.domain.entities.Bird;
+import com.calopsite.demo.domain.entities.Mutation;
 import com.calopsite.demo.domain.entities.Product;
 import com.calopsite.demo.domain.entities.User;
 import com.calopsite.demo.domain.enums.ProductType;
@@ -41,6 +42,12 @@ public class ProductResource {
         }else{
             throw new ProductTypeException(HttpStatus.NOT_FOUND,type + " não existe");
         }
+    }
+    @GetMapping(value = "/user")
+    public ResponseEntity<List<Product>> findByUser() {
+        UserDTO userDTO = userService.getLoggedUser();
+        List<Product> products = productRepository.findByUser(userDTO.getId());
+        return ResponseEntity.ok().body(products);
     }
 
 }
