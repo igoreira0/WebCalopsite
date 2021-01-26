@@ -14,6 +14,7 @@ public class Product implements Serializable {
     private String name;
     private Float quantity;
     private Long user;
+    private Float price;
     private ProductType productType;
     public Product() {
     }
@@ -30,12 +31,13 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public Product(Long id, String name, Float quantity, Long user, ProductType productType) {
+    public Product(Long id, String name, Float quantity, Long user, ProductType productType,Float price) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.user = user;
         this.productType = productType;
+        this.price = price;
     }
 
 
