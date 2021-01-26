@@ -42,8 +42,8 @@ public class TestConfig implements CommandLineRunner {
         Long idU2 = userRepository.save(u2).getId();
         userRepository.save(u3);
 
-        Product p1 = new Product(null, "Alpiste", 3F, idU1, ProductType.FOOD);
-        Product p2 = new Product(null, "Xarope", 10F, idU1, ProductType.MEDICAMENT);
+        Product p1 = new Product(null, "Alpiste", 3F, idU1, ProductType.FOOD, 50F);
+        Product p2 = new Product(null, "Xarope", 10F, idU1, ProductType.MEDICAMENT, 32F);
         productRepository.saveAll(Arrays.asList(p1,p2));
 
         Vivarium v1 = new Vivarium(null, 8, "imagine uma descricao", idU1);
