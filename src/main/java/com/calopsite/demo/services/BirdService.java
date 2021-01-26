@@ -4,6 +4,8 @@ import com.calopsite.demo.domain.entities.Vivarium;
 import com.calopsite.demo.domain.entities.Mutation;
 import com.calopsite.demo.repositories.BirdRepository;
 import com.calopsite.demo.repositories.MutationRepository;
+import com.calopsite.demo.repositories.UserRepository;
+import com.calopsite.demo.repositories.VivariumRepository;
 import com.calopsite.demo.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,23 +19,33 @@ import java.util.Optional;
 public class BirdService {
     @Autowired
     private BirdRepository birdRepository;
+    @Autowired
+    private MutationRepository mutationRepository;
+    @Autowired
+    private VivariumRepository vivariumRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
 
 
-    @GetMapping
+
     public List<Bird> findAll(){
         return birdRepository.findAll();
     }
-    @GetMapping
+
     public Bird findByID(long id){
         Optional<Bird> bird = birdRepository.findById(id);
         if(bird.isEmpty())
             throw new NotFoundException(HttpStatus.BAD_REQUEST,"A Mutação não existe!");
         return bird.get();
     }
-    public static void newBird(Long id, Mutation mutation, Long fatherId, Long motherId, Vivarium vivarium) {
-        Bird newBird = new Bird(null, mutation, fatherId, motherId, vivarium);
+    public  void newBird(Long idMutation, Long fatherId,Long motherId, Long idVivarium,Long userId) {
+        Bird newBird = new Bird(null, mutationRepository.findById(idMutation).get(), fatherId, motherId,vivariumRepository.findById(idVivarium).get(),userRepository.findById(userId).get());
+        birdRepository.save(newBird);
     }
+
+
+
 }
 

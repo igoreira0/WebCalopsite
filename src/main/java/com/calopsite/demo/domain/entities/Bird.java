@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class Bird implements Serializable {
@@ -23,6 +24,8 @@ public class Bird implements Serializable {
     @JsonIgnore
     private Vivarium vivarium;
     private Gender gender;
+    @ManyToOne
+    private User user;
 
     public Bird() {
     }
@@ -44,6 +47,17 @@ public class Bird implements Serializable {
         this.vivarium = vivarium;
         this.gender = gender;
     }
+    public Bird(Long id, Mutation mutation, Long fatherId, Long motherId, Vivarium vivarium,User user) {
+        this.id = id;
+        this.mutation = mutation;
+        this.fatherId = fatherId;
+        this.motherId = motherId;
+        this.vivarium = vivarium;
+        this.gender = Gender.UNDETERMINED;
+        this.user = user;
+    }
+
+
 
 
     public Gender getGender() {
