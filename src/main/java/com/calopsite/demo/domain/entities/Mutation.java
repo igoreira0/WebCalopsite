@@ -2,10 +2,7 @@ package com.calopsite.demo.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,14 +14,16 @@ public class Mutation implements Serializable {
     private String mutation;
     @JsonProperty("base_price")
     private Float basePrice;
-
+    @ManyToOne
+    private User user;
     public Mutation() {
     }
 
-    public Mutation(Long id, String mutation, Float basePrice) {
+    public Mutation(Long id, String mutation, Float basePrice, User user) {
         this.id = id;
         this.mutation = mutation;
         this.basePrice = basePrice;
+        this.user = user;
     }
 
     @Override

@@ -22,6 +22,8 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Vivarium> vivarium;
     private Profile profile;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Mutation> mutations;
 
     public User() {
         this.profile = Profile.CLIENT;

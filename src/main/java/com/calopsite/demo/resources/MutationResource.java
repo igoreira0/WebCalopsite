@@ -1,6 +1,8 @@
 package com.calopsite.demo.resources;
 import com.calopsite.demo.domain.entities.Mutation;
+import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.services.MutationsService;
+import com.calopsite.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,9 @@ public class MutationResource {
     @Autowired
     private MutationsService mutationsService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping
     public ResponseEntity<List<Mutation>> findAll(){
         List<Mutation> list = mutationsService.findAll();
@@ -26,4 +31,11 @@ public class MutationResource {
         Mutation obj = mutationsService.findByID(id);
         return ResponseEntity.ok().body(obj);
     }
+    @GetMapping(value = "/user")
+    public ResponseEntity<List<Mutation>> findByUser() {
+        UserDTO userDTO = userService.getLoggedUser();
+        List<Mutation> mutations = mutationsService.findByUser(userService.findByID(userDTO.getId()));
+        return ResponseEntity.ok().body(mutations);
+    }
+
 }
