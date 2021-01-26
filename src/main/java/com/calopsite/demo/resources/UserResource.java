@@ -30,9 +30,9 @@ public class UserResource {
         return ResponseEntity.ok().body(list);
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findByID(@PathVariable Long id){
-        User obj = userService.findByID(id);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<UserDTO> findByID(@PathVariable Long id){
+        UserDTO userdto = new UserDTO(userService.findByID(id));
+        return ResponseEntity.ok().body(userdto);
     }
 
     @DeleteMapping("/del")
