@@ -1,6 +1,7 @@
 package com.calopsite.demo.services;
 
 import com.calopsite.demo.domain.entities.Vivarium;
+import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.utils.exceptions.NotFoundException;
 import com.calopsite.demo.repositories.VivariumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,11 @@ import java.util.Optional;
 @Service
 public class VivariumService {
 
+    @Autowired
     private VivariumRepository vivariumRepository;
+
+    @Autowired
+    UserService userService;
 
     public Vivarium getVivariumIfExist(Long VivariumId){
         Optional<Vivarium> vivarium = vivariumRepository.findById(VivariumId);
@@ -33,7 +38,8 @@ public class VivariumService {
     }
 
     public void newVivarium(String description){
-        Vivarium vivarium = new Vivarium(description);
+        UserDTO userDTO = userService.getLoggedUser();
+        Vivarium vivarium = new Vivarium(description, userService.findByID(userDTO.getId()));
         vivariumRepository.save(vivarium);
     }
 
