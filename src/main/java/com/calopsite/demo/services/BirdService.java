@@ -40,7 +40,7 @@ public class BirdService {
             throw new NotFoundException(HttpStatus.BAD_REQUEST,"A Mutação não existe!");
         return bird.get();
     }
-    public  void newBird(Long idMutation, Long fatherId,Long motherId, Long idVivarium,Long userId) {
+    public void newBird(Long idMutation, Long fatherId,Long motherId, Long idVivarium,Long userId) {
         Bird newBird = new Bird(null, mutationRepository.findById(idMutation).get(), fatherId, motherId,vivariumRepository.findById(idVivarium).get(),userRepository.findById(userId).get());
         birdRepository.save(newBird);
     }
