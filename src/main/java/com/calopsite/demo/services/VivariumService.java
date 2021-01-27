@@ -1,5 +1,7 @@
 package com.calopsite.demo.services;
 
+import com.calopsite.demo.domain.entities.Mutation;
+import com.calopsite.demo.domain.entities.User;
 import com.calopsite.demo.domain.entities.Vivarium;
 import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.utils.exceptions.NotFoundException;
@@ -43,5 +45,9 @@ public class VivariumService {
         vivariumRepository.save(vivarium);
     }
 
+    public List<Vivarium> findByUser(User user) {
+        List<Vivarium> vivariums = vivariumRepository.findByUser(user);
+        return vivariums;
+    }
 
 }

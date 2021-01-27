@@ -1,10 +1,13 @@
 package com.calopsite.demo.resources;
 import com.calopsite.demo.domain.entities.Mutation;
+import com.calopsite.demo.domain.enums.Profile;
 import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.services.MutationsService;
 import com.calopsite.demo.services.UserService;
+import com.calopsite.demo.utils.exceptions.AuthorizationException;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +24,9 @@ public class MutationResource {
 
     @GetMapping
     public ResponseEntity<List<Mutation>> findAll(){
+        UserDTO userDTO = userService.getLoggedUser();
+        if(userDTO.getProfile() != Profile.ADMIN)
+            throw new AuthorizationException(HttpStatus.FORBIDDEN,"você não tem permissão para visualizar");
         List<Mutation> list = mutationsService.findAll();
         return ResponseEntity.ok().body(list);
     }
