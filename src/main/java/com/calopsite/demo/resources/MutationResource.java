@@ -3,12 +3,10 @@ import com.calopsite.demo.domain.entities.Mutation;
 import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.services.MutationsService;
 import com.calopsite.demo.services.UserService;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +34,13 @@ public class MutationResource {
         UserDTO userDTO = userService.getLoggedUser();
         List<Mutation> mutations = mutationsService.findByUser(userService.findByID(userDTO.getId()));
         return ResponseEntity.ok().body(mutations);
+    }
+
+    @PostMapping("/new")
+    public void newMutation(@RequestParam("description") @NotNull String description,
+                            @RequestParam("price") @NotNull float price,
+                            @RequestParam("mutation") @NotNull String mutation) {
+        mutationsService.newMutation(mutation,price,description);
     }
 
 }

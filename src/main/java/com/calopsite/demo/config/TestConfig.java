@@ -51,9 +51,9 @@ public class TestConfig implements CommandLineRunner {
         Vivarium viv1 = vivariumRepository.save(v1);
         Vivarium viv2 = vivariumRepository.save(v2);
 
-        Mutation m1 = new Mutation(null, "Arlequim", 100F, u1);
-        Mutation m2 = new Mutation(null, "Fulvo", 90F, u2);
-        Mutation m3 = new Mutation(null, "Albino", 500F, u1);
+        Mutation m1 = new Mutation(null, "Arlequim", 100F, u1,"calma");
+        Mutation m2 = new Mutation(null, "Fulvo", 90F, u2,"brava");
+        Mutation m3 = new Mutation(null, "Albino", 500F, u1,"calma");
         Mutation mut1 = mutationRepository.save(m1);
         Mutation mut2 = mutationRepository.save(m2);
         Mutation mut3 = mutationRepository.save(m3);

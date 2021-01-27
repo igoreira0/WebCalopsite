@@ -28,7 +28,7 @@ public class VivariumResource {
     }
 
     @PostMapping("/new")
-    public void seedVivarium(@RequestParam("description") @NotNull String description) {
+    public void newVivarium(@RequestParam("description") @NotNull String description) {
         vivariumService.newVivarium(description);
     }
 
