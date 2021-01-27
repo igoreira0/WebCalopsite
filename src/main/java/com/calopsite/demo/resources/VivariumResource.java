@@ -2,12 +2,10 @@ package com.calopsite.demo.resources;
 
 import com.calopsite.demo.domain.entities.Vivarium;
 import com.calopsite.demo.services.VivariumService;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +25,11 @@ public class VivariumResource {
     public ResponseEntity<Vivarium> findByID(@PathVariable Long id){
         Vivarium obj = vivariumService.findByID(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @PostMapping("/new")
+    public void seedVivarium(@RequestParam("description") @NotNull String description) {
+        vivariumService.newVivarium(description);
     }
 
 }

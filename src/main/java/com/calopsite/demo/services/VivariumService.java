@@ -14,7 +14,6 @@ import java.util.Optional;
 @Service
 public class VivariumService {
 
-    @Autowired
     private VivariumRepository vivariumRepository;
 
     public Vivarium getVivariumIfExist(Long VivariumId){
@@ -27,10 +26,16 @@ public class VivariumService {
     public List<Vivarium> findAll(){
         return vivariumRepository.findAll();
     }
-    @GetMapping
+
     public Vivarium findByID(Long id){
         Optional<Vivarium> obj = vivariumRepository.findById(id);
         return obj.get();
     }
+
+    public void newVivarium(String description){
+        Vivarium vivarium = new Vivarium(description);
+        vivariumRepository.save(vivarium);
+    }
+
 
 }
