@@ -34,6 +34,10 @@ public class Vivarium implements Serializable {
         this.user = new User(user);
     }
 
+    public Vivarium(String description){
+        this.description = description;
+    }
+
     public List<Bird> getBird() {
         return bird;
     }
