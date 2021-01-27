@@ -16,14 +16,16 @@ public class Mutation implements Serializable {
     private Float basePrice;
     @ManyToOne
     private User user;
+    private String description;
     public Mutation() {
     }
 
-    public Mutation(Long id, String mutation, Float basePrice, User user) {
+    public Mutation(Long id, String mutation, Float basePrice, User user, String description) {
         this.id = id;
         this.mutation = mutation;
         this.basePrice = basePrice;
         this.user = user;
+        this.description = description;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.calopsite.demo.services;
 
 import com.calopsite.demo.domain.entities.Mutation;
 import com.calopsite.demo.domain.entities.User;
+import com.calopsite.demo.dto.UserDTO;
 import com.calopsite.demo.repositories.MutationRepository;
 import com.calopsite.demo.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ public class MutationsService {
     @Autowired
     private MutationRepository mutRepository;
 
-    @GetMapping
+    @Autowired
+    private UserService userService;
+
     public List<Mutation> findAll() {
         return mutRepository.findAll();
     }
@@ -30,10 +33,15 @@ public class MutationsService {
         return mutation.get();
     }
 
-    @GetMapping
     public List<Mutation> findByUser(User user) {
         List<Mutation> mutations = mutRepository.findByUser(user);
         return mutations;
+    }
+
+    public void newMutation(String mutationName, Float basePrice, String description){
+        UserDTO userDTO = userService.getLoggedUser();
+        Mutation mutation = new Mutation(null,mutationName, basePrice,userService.findByID(userDTO.getId()),description);
+        mutRepository.save(mutation);
     }
 }
 
