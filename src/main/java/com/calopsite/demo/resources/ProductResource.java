@@ -30,13 +30,13 @@ public class ProductResource {
 
     @PostMapping("/new")
     public void seedVivarium(@RequestParam("name") @NotNull String productName,
-                             @RequestParam("type") @NotNull int  type,
+                             @RequestParam("type") @NotNull String  type,
                              @RequestParam("price") @NotNull Float  productPrice,
                              @RequestParam("quantity") @NotNull Float productQuantity) {
-        if (type == 0) {
+        if (type.equals("food")) {
             Product product = new Product(null, productName, productQuantity, userService.getLoggedUser().getId(), ProductType.FOOD,productPrice);
             productRepository.save(product);
-        }else if(type == 1){
+        }else if(type.equals("medicament")){
             Product product = new Product(null, productName, productQuantity, userService.getLoggedUser().getId(), ProductType.MEDICAMENT,productPrice);
             productRepository.save(product);
         }else{
