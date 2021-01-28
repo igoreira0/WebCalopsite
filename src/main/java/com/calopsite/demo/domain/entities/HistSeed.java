@@ -14,20 +14,16 @@ public class HistSeed {
     private Vivarium vivarium;
     private Float quantity;
     private LocalDateTime dateTime;
+    @ManyToOne
+    private User user;
 
-    public HistSeed(Long id, Product product, Vivarium vivarium, Float quantity) {
-        this.id = id;
-        this.product = product;
-        this.vivarium = vivarium;
-        this.quantity = quantity;
-    }
-
-    public HistSeed(Long id, Long product, Long vivarium, Float quantity) {
+    public HistSeed(Long id, Long product, Long vivarium, Float quantity, User user) {
         this.id = id;
         this.product = new Product(product);
         this.vivarium = new Vivarium(vivarium);
         this.quantity = quantity;
         this.dateTime = LocalDateTime.now();
+        this.user = user;
     }
 
     public LocalDateTime getDateTime() {
