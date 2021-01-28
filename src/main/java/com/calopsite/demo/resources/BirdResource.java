@@ -40,14 +40,9 @@ public class BirdResource {
     @PostMapping(value ="/new")
     public void newBird(
             @RequestParam("mutation") @NotNull Long mutation,
-            @RequestParam("fatherId") Long fatherId,
-            @RequestParam("motherId") Long motherId,
-            @RequestParam("vivarium") Long vivarium){
+            @RequestParam("vivarium") @NotNull Long vivarium,
+            @RequestParam("gender") @NotNull String gender){
         UserDTO userDTO = userService.getLoggedUser();
-
-
-        birdService.newBird(mutation, fatherId, motherId,vivarium, userDTO.getId());
-
-
+        birdService.newBird(mutation,vivarium, userDTO.getId(),gender);
     }
 }

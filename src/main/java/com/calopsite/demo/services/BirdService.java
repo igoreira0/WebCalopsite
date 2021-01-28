@@ -2,6 +2,7 @@ package com.calopsite.demo.services;
 import com.calopsite.demo.domain.entities.Bird;
 import com.calopsite.demo.domain.entities.Vivarium;
 import com.calopsite.demo.domain.entities.Mutation;
+import com.calopsite.demo.domain.enums.Gender;
 import com.calopsite.demo.repositories.BirdRepository;
 import com.calopsite.demo.repositories.MutationRepository;
 import com.calopsite.demo.repositories.UserRepository;
@@ -40,9 +41,16 @@ public class BirdService {
             throw new NotFoundException(HttpStatus.BAD_REQUEST,"A Mutação não existe!");
         return bird.get();
     }
-    public void newBird(Long idMutation, Long fatherId,Long motherId, Long idVivarium,Long userId) {
-        Bird newBird = new Bird(null, mutationRepository.findById(idMutation).get(), fatherId, motherId,vivariumRepository.findById(idVivarium).get(),userRepository.findById(userId).get());
-        birdRepository.save(newBird);
+    public void newBird(Long idMutation, Long idVivarium, Long userId, String gender) {
+        Bird bird;
+        if(gender.equals("male"))
+            bird = new Bird(mutationRepository.findById(idMutation).get(), vivariumRepository.findById(idVivarium).get(),userRepository.findById(userId).get(), Gender.MALE);
+        else if(gender.equals("female"))
+            bird = new Bird(mutationRepository.findById(idMutation).get(), vivariumRepository.findById(idVivarium).get(),userRepository.findById(userId).get(), Gender.FEMALE);
+        else
+            bird = new Bird(mutationRepository.findById(idMutation).get(), vivariumRepository.findById(idVivarium).get(),userRepository.findById(userId).get(), Gender.UNDETERMINED);
+        birdRepository.save(bird);
+
     }
 
 
