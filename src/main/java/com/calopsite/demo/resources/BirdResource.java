@@ -45,4 +45,13 @@ public class BirdResource {
         UserDTO userDTO = userService.getLoggedUser();
         birdService.newBird(mutation,vivarium, userDTO.getId(),gender);
     }
+
+    @GetMapping(value = "/user")
+    public ResponseEntity<List<Bird>> findByUser() {
+        UserDTO userDTO = userService.getLoggedUser();
+        List<Bird> birds = birdService.findByUser(userService.findByID(userDTO.getId()));
+        return ResponseEntity.ok().body(birds);
+    }
+
+
 }

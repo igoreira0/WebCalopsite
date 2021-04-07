@@ -6,6 +6,9 @@ import com.calopsite.demo.repositories.HistSeedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class HistSeedService {
 
@@ -28,5 +31,11 @@ public class HistSeedService {
         HistSeed histSeed = new HistSeed(null, productId, vivariumId, quantity, userService.findByID(userDTO.getId()));
         productService.updateQuantity(productId, quantity);
         histSeedRepository.save(histSeed);
+    }
+
+    public void getCost(){
+        UserDTO userDTO = userService.getLoggedUser();
+        List<HistSeed> histSeeds = histSeedRepository.findByUser(userService.findByID(userDTO.getId()));
+        return;
     }
 }

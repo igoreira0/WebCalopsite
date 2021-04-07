@@ -19,6 +19,11 @@ public class HistSeedResource {
         histSeedService.seedVivarium(productId, vivariumId, quantity);
     }
 
+    @GetMapping(value = "/summarize")
+    public void summarizeVivarium(){
+        histSeedService.getCost();
+
+    }
 
 
 }

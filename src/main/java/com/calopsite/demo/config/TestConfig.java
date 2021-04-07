@@ -58,8 +58,8 @@ public class TestConfig implements CommandLineRunner {
         Mutation mut2 = mutationRepository.save(m2);
         Mutation mut3 = mutationRepository.save(m3);
 
-        Bird b1 = new Bird(null, mut1,null, null, viv1, Gender.MALE);
-        Bird b2 = new Bird(null, mut2,null, null, viv1, Gender.FEMALE);
+        Bird b1 = new Bird(mut1, viv1, u1, Gender.MALE);
+        Bird b2 = new Bird(mut2, viv1, u1, Gender.FEMALE);
         birdRepository.saveAll(Arrays.asList(b1,b2));
         Bird b3 = new Bird(null, mut3, birdRepository.findById(1L).get().getId() , birdRepository.findById(2L).get().getId(), viv2);
         birdRepository.save(b3);

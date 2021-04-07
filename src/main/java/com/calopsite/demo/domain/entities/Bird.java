@@ -47,11 +47,9 @@ public class Bird implements Serializable {
         this.vivarium = vivarium;
         this.gender = gender;
     }
-    public Bird(Long id, Mutation mutation, Long fatherId, Long motherId, Vivarium vivarium,User user) {
+    public Bird(Long id, Mutation mutation, Vivarium vivarium,User user) {
         this.id = id;
         this.mutation = mutation;
-        this.fatherId = fatherId;
-        this.motherId = motherId;
         this.vivarium = vivarium;
         this.gender = Gender.UNDETERMINED;
         this.user = user;

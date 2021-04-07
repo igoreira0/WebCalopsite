@@ -1,5 +1,6 @@
 package com.calopsite.demo.services;
 import com.calopsite.demo.domain.entities.Bird;
+import com.calopsite.demo.domain.entities.User;
 import com.calopsite.demo.domain.entities.Vivarium;
 import com.calopsite.demo.domain.entities.Mutation;
 import com.calopsite.demo.domain.enums.Gender;
@@ -50,7 +51,11 @@ public class BirdService {
         else
             bird = new Bird(mutationRepository.findById(idMutation).get(), vivariumRepository.findById(idVivarium).get(),userRepository.findById(userId).get(), Gender.UNDETERMINED);
         birdRepository.save(bird);
+    }
 
+    public List<Bird> findByUser(User user) {
+        List<Bird> birds = birdRepository.findByUser(user);
+        return birds;
     }
 
 
